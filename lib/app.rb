@@ -21,6 +21,7 @@ class App
     p 'ID of person:'
     person_id = gets.chomp.to_i
     rentals = @rentals.select { |rental| rental.person_id == person_id }
+
     if rentals.empty?
       p "No rentals found for person with ID #{person_id}."
     else
@@ -40,5 +41,26 @@ class App
     book = Book.new(title, author)
     @books << book
     p 'Book created successfully!'
+  end
+
+  def create_person
+    p 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
+    role = gets.chomp.to_i
+    p 'Age:'
+    age = gets.chomp.to_i
+    p 'Name:'
+    name = gets.chomp
+
+    if role == 1
+      p 'Has parent permission? [Y/N]:'
+      parent_permission = gets.chomp.downcase == 'y'
+      person = Student.new(age, name, parent_permission)
+    else
+      p 'Specialization:'
+      specialization = gets.chomp
+      person = Teacher.new(age, name, specialization)
+    end
+    @people << person
+    p 'Person created successfully!'
   end
 end
