@@ -1,8 +1,14 @@
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'book'
+require_relative 'rental'
+
 class App
   def initialize
     @books = []
     @people = []
     @rentals = []
+    p 'Welcome to School Library App!'
   end
 
   def list_books

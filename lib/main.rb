@@ -1,11 +1,39 @@
-require_relative 'person'
-require_relative 'capitalize_decorator'
-require_relative 'trimmer_decorator'
+require_relative 'app'
 
-person = Person.new(22, 'maximiliano')
+def main
+  loop do
+    p 'Please choose an option by entering a number:'
+    p '1 - List all books'
+    p '2 - List all people'
+    p '3 - Create a person'
+    p '4 - Create a book'
+    p '5 - Create a rental'
+    p '6 - List all rentals for a given person id'
+    p '7 - Exit'
 
-capitalized_person = CapitalizeDecorator.new(person)
-puts "Capitalized name: #{capitalized_person.correct_name}"
+    choice = gets.chomp.to_i
 
-capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-puts "Capitalized and trimmed name: #{capitalized_trimmed_person.correct_name}"
+    app = App.new
+
+    case choice
+    when 1
+      app.list_books
+    when 2
+      app.list_people
+    when 3
+      app.create_person
+    when 4
+      app.create_book
+    when 5
+      app.create_rental
+    when 6
+      app.list_rentals
+    when 7
+      break
+    else
+      p 'Invalid choice. Please try again.'
+    end
+  end
+end
+
+main
