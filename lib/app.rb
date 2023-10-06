@@ -22,7 +22,7 @@ class App
     person_id = gets.chomp.to_i
     rentals = @rentals.select { |rental| rental.person_id == person_id }
     if rentals.empty?
-      puts "No rentals found for person with ID #{person_id}."
+      p "No rentals found for person with ID #{person_id}."
     else
       rentals.each do |rental|
         rented_book = @books.find { |book| book.id == rental.book_id }
@@ -30,5 +30,15 @@ class App
         p "Date: #{rental.date} Book #{rented_book.title} by #{rented_book.author}"
       end
     end
+  end
+
+  def create_book
+    p 'Title:'
+    title = gets.chomp
+    p 'Author:'
+    author = gets.chomp
+    book = Book.new(title, author)
+    @books << book
+    p 'Book created successfully!'
   end
 end
