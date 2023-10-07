@@ -37,8 +37,8 @@ class App
     puts
     puts 'ID of person:'
     person_id = gets.chomp.to_i
-    person = @people.find { |person| person.id == person_id }
-    if person.nil?
+    found_person = @people.find { |person| person.id == person_id }
+    if found_person.nil?
       puts 'Person not found.'
     else
       rentals = @rentals.select { |rental| rental.person == person }
