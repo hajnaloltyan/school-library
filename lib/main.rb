@@ -26,7 +26,7 @@ def handle_choice(choice, app)
   when 5
     app.create_rental
   when 6
-    app.list_rentals_for_person
+    app.list_rentals
   when 7
     return false
   end

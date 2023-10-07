@@ -37,15 +37,19 @@ class App
     puts
     puts 'ID of person:'
     person_id = gets.chomp.to_i
-    rentals = @rentals.select { |rental| rental.person_id == person_id }
-
-    if rentals.empty?
-      puts "No rentals found for person with ID #{person_id}."
+    person = @people.find { |person| person.id == person_id }
+    if person.nil?
+      puts 'Person not found.'
     else
-      rentals.each do |rental|
-        rented_book = @books.find { |book| book.id == rental.book_id }
+      rentals = @rentals.select { |rental| rental.person == person }
+      if rentals.empty?
+        puts 'No rentals found.'
+      else
         puts 'Rentals:'
-        puts "Date: #{rental.date} Book #{rented_book.title} by #{rented_book.author}"
+        rentals.each do |rental|
+          rented_book = @books.find { |book| book.id == rental.book_id }
+          puts "Date: #{rental.date} Book #{rented_book.title} by #{rented_book.author}"
+        end
       end
     end
   end
@@ -74,7 +78,7 @@ class App
     if role == 1
       puts 'Has parent permission? [Y/N]:'
       parent_permission = gets.chomp.downcase == 'y'
-      person = Student.new(age, name, parent_permission)
+      person = Student.new(age, name, parent_permission: parent_permission)
     else
       puts 'Specialization:'
       specialization = gets.chomp
