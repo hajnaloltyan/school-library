@@ -2,8 +2,11 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'classroom'
 
 class App
+  attr_accessor :books, :people, :rental, :classroom
+
   def initialize
     @books = []
     @people = []
@@ -76,9 +79,10 @@ class App
     name = gets.chomp
 
     if role == 1
-      puts 'Has parent permission? [Y/N]:'
-      parent_permission = gets.chomp.downcase == 'y'
-      person = Student.new(age, name, parent_permission: parent_permission)
+      puts 'Has parent permission? [y/n]:'
+      permission = (gets.chomp == 'y')
+      classroom = Classroom.new('green')
+      person = Student.new(age, classroom, name, parent_permission: permission)
     else
       puts 'Specialization:'
       specialization = gets.chomp
