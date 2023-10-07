@@ -44,14 +44,13 @@ class App
     if found_person.nil?
       puts 'Person not found.'
     else
-      rentals = @rentals.select { |rental| rental.person == person }
+      rentals = @rentals.select { |rental| rental.person == found_person }
       if rentals.empty?
         puts 'No rentals found.'
       else
         puts 'Rentals:'
         rentals.each do |rental|
-          rented_book = @books.find { |book| book.id == rental.book_id }
-          puts "Date: #{rental.date} Book #{rented_book.title} by #{rented_book.author}"
+          puts "Date: #{rental.date} Book: #{rental.book.title} by #{rental.book.author}"
         end
       end
     end
