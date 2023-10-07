@@ -5,10 +5,11 @@ class Student < Person
 
   def initialize(age, classroom, name = 'Unknown', parent_permission: true)
     super(age, name)
+    @classroom = classroom
+    @parent_permission = parent_permission
   end
 
-  def classroom=(classroom)
-    @classroom = classroom
+  def class_room=(classroom)
     classroom.students.push(self) unless classroom.students.include?(self)
   end
 
